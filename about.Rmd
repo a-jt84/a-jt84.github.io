@@ -1,0 +1,10 @@
+---
+title: "About"
+author: "Andy Turner"
+date: "2023-10-19"
+output: html_document
+---
+
+## About this website
+
+About page for Andy's website. Website is in process of being built. Will be added to throughout Fall and Winter of 2023. 
