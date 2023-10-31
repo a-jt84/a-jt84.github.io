@@ -25,3 +25,4 @@ Photo 2: Pic of me in front of the Scorpio constellation in the Atacama desert
 
 Photo 3: Pic of me in front of a neat cactus in Uyuni, Bolivia
 ![](images/cactcus.jpg)
+
