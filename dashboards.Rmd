@@ -1,16 +1,17 @@
 ---
-title: "HW4 Dashboard"
-output: html_document
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
 ---
 
-```{r}
+```{r setup, include=FALSE}
+library(flexdashboard)
 library(tidyverse)
 library(plotly)
 library(p8105.datasets)
-library(dplyr)
-```
 
-```{r}
 data(ny_noaa)
 
 ny_noaa |> 
@@ -33,27 +34,43 @@ ny_noaa =
   select(name, id, everything())
 ```
 
-Line Graph
+**NOTE**: Weather data was pulled from the NOAA National Climatic Data Center.
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Average Temperature 1982- 1983
+
 ```{r}
 ny_noaa |> 
   mutate(avg_temp= (tmin+tmax)/2) |> 
   plot_ly(x=~date, y=~avg_temp, color=~name, type= 'scatter', mode= 'lines')
 ```
 
-BAR PLOT
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Dry vs. Light Rain vs. Rainy Days: 1982-1983
+
 ```{r}
 ny_noaa |> 
-  mutate(precip_category = ifelse(prcp < 1, 1, ifelse(prcp >= 1 & prcp <= 100, 2, 3))) |> 
+  mutate(precip_category = ifelse(prcp < 1, 1, ifelse(prcp >= 1 & prcp <= 100, 2, 3)),
+         precip_category = recode(precip_category,
+    "1" = "dry",
+    "2" = "light rain",
+    "3" = "rainy"
+  ))|> 
   group_by(precip_category, name) |> 
   summarize(n_obs=n()) |> 
   plot_ly(
     x=~precip_category, y=~n_obs, color=~name, type="bar", colors="viridis")
 ```
 
+### Box Plot of Avg Temperature
 
-BOX PLOT
 ```{r}
 ny_noaa |> 
   mutate(avg_temp= (tmin+tmax/2)) |> 
   plot_ly(y =~avg_temp, color = ~name, type = "box", colors = "viridis")
 ```
+

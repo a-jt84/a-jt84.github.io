@@ -12,6 +12,7 @@ This is a [link](https://github.com/a-jt84) to Andy's GitHub page. Andy's public
 
 * Here's a link to the [about](about.html) page.
 * Here's a link to the [resume](resume.html) page.
+* Here's a link to the [dashboard](dashboards.html)page.
 
 ## Bragging about summer 
 
